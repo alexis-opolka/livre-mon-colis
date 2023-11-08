@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="sae-32---d%C3%A9velopper-une-application-communicante">SAE-32 - Développer une application communicante</h1>
+<h2 id="sp%C3%A9cificit%C3%A9s">Spécificités</h2>
+<p>Une application client/serveur de suivi de livraison de colis.</p>
+<p>On veut pouvoir localiser les colis à tout instant (position GPS: latitude,longitude) et suivre l'historique de leurs déplacements.
+A chaque étape de la livraison d'un colis, on va donc enregistrer la date et la nouvelle position du colis.</p>
+<p>L'application client/serveur sera écrite en python fonctionnera en TCP sur le port 3456.
+En option, on pourra chiffrer les échanges de données (TLS).</p>
+<ul>
+<li>
+<p>Fonctionnalités obligatoires:</p>
+<ul>
+<li>identification à partir des utilisateurs d'une base de données.</li>
+<li>notions de droits pour les utilisateurs (voir ci-dessous).</li>
+<li>stockage de tous les évènements (authentification, commandes, erreurs, ...) dans un fichier de traces horodaté.</li>
+</ul>
+</li>
+<li>
+<p>Réaliser enfin une interface graphique et/ou WEB et/ou Mobile de suivi de colis ainsi que la partie gestion</p>
+</li>
+</ul>
+<details>
+<summary>
+</summary></details><ol>
+<li>
+<p>Plus spécifique</p>
+
+<ul>
+<li>La partie web devant permettre à :
+<ul>
+<li>un expéditeur de &quot;créer&quot; le colis dans l'application en indiquant le transporteur et le destinataire.</li>
+<li>un transporteur :
+<ul>
+<li>de préparer une livraison avec plusieurs colis dans un véhicule donné (liste ordonnée).</li>
+<li>de modifier la position GPS d'un/plusieurs colis (par exemple: tous ceux restant dans un véhicule de transport).</li>
+<li>d'indiquer la livraison d'un colis à un destinataire.</li>
+</ul>
+</li>
+<li>un destinataire de valider la réception d'un colis.</li>
+</ul>
+</li>
+</ul>
+<p>Chaque colis est identifié et possède un poids, 3 dimensions (hauteur,largeur,longueur) et un état:</p>
+<ul>
+<li>EMBALLE: Date d'emballage (expéditeur)</li>
+<li>ARRIVE: Date de arrivée au dépot (transporteur)</li>
+<li>DEPART: Date de départ du dépot + identifiant livraison (transporteur)</li>
+<li>LIVRE: Date de livraison (transporteur)</li>
+<li>RECU: Date de reception (destinataire)</li>
+</ul>
+<p>De plus on connaît pour chaque colis : <code>l'expéditeur</code>, <code>le transporteur</code> et <code>le destinataire</code> du colis (<code>nom</code>,<code>adresse</code>,<code>codePostal</code>,<code>ville</code>,<code>mail</code>,<code>tel</code>).</p>
+<p>Un expéditeur n'aura pas les mêmes &quot;commandes&quot; qu'un transporteur ou qu'un destinataire :</p>
+<ul>
+<li>Expéditeur:
+<ul>
+<li>listDest, showDest id, createDest, modifDest[^1] id, deleteDest[^2] id</li>
+<li>listTransp, showTransp id, createTransp, modifTransp[^1] id, deleteTransp[^2] id</li>
+<li>listColis, showColis id, createColis, modifColis[^1] id, deleteColis[^2] id, gpsColis[^1] id</li>
+</ul>
+</li>
+<li>Transporteur:
+<ul>
+<li>listVehic, showVehic id, createVehic, modifVehic[^1] id, deleteVehic[^2] id, gpsVehic[^1] id</li>
+<li>listLivr, showLivr id, createLivr, deleteLivr[^2] id</li>
+<li>listColis, showColis id, livreColis[^4] id
+<ul>
+<li>addColisLivr[^1] id, livrId, insertColisLivr[^1] id, rank, livrId, delColisLivr[^1] id, livrId</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Destinataire:
+<ul>
+<li>showColis[^3] id, recuColis[^3] id</li>
+</ul>
+</li>
+<li>Administrateur:
+<ul>
+<li>possède tous les droits</li>
+<li>listExp, showExp id, createExp, modifExp[^1] id, deleteExp[^2] id</li>
+</ul>
+</li>
+</ul>
+<p>[^1]: si il en est le créateur,
+[^2]: si il n'est pas utilisé,
+[^3]: si il en est le destinataire,
+[^4]: si il en est le transporteur</p>
+<hr>
+</li>
+</ol>
+<h2 id="exemple-de-valeurs">Exemple de valeurs</h2>
+<pre class="hljs"><code><div>Aliexpress - c512,1.2 Kg,h8,l12,L21 - John DOE
+
+ManoMano - c514,0.7 Kg,h4,l21,L30 - Bob MARTIN
+
+Amazon - c513,1.7 Kg,h18,l20,L40 - John DOE
+
+Ebay - c515,1.1 Kg,h12,l20,L35 - Alice SMITH
+
+       c517,0.2 Kg,h1,l21,L30 - Clark BLACK
+
+cdiscount - c516,0.8 Kg,h6,l12,L15 - Dilan WHITE
+
+            c518,0.9 Kg,h7,l12,L15 - Elian GRAY
+
+DHL Vehic4-Renault Trafic ; Livr18:c514,c517,c516
+
+UPS Vehic5-Peugeot Boxer ; Livr19:c512,c513,c515
+
+FEDEX Vehic6-Citroen Jumper
+
+17-04-2023 09:32:15,c512,43.591476,3.892096
+
+18-04-2023 10:44:18,c515,43.591587,3.891715
+
+18-04-2023 10:52:04,c513,43.591587,3.891715
+
+18-04-2023 11:32:04,Vehic5,43.591587,3.891715
+
+18-04-2023 11:33:04,Vehic5,43.591154,3.883240
+
+18-04-2023 11:34:04,Vehic5,43.597277,3.875687
+
+18-04-2023 11:35:04,Vehic5,43.604238,3.867705
+
+18-04-2023 11:35:48,Vehic5,43.607345,3.868199+c512-LIVRE+c513-LIVRE
+</div></code></pre>
+
+<hr>
+<h2 id="comparaisons-des-technologie">Comparaisons des technologie</h2>
+<h3 id="pour-la-base-de-donn%C3%A9es">Pour la base de données</h3>
+<p>Pour la base de données, nous pouvons utiliser différentes sortes
+de Base de donnée (BDD):</p>
+<ul>
+<li>
+<p>BDD Relationelle:</p>
+<p>Elles sont plus communément appelées SQL-like puisque elles adoptent le schéma relationelle
+et le plus communément connu par SQL.</p>
+<p>On retrouve les BDD suivantes:</p>
+<ul>
+<li><a href="https://www.mysql.com/">MySQL</a></li>
+<li><a href="https://www.sqlite.org/index.html">SQLite</a></li>
+<li><a href="https://mariadb.org/">MariaDB</a></li>
+<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong><br>
+Ces BDD ont bien souvent un shell SQL ou une implémentation de le leur
+langage en format SQL-like.</p>
+</blockquote>
+<p>Pour les modèles relationnels, nous avons leur force dans les cas
+où nous travaillons avec un système de données qui est centralisé
+sur différentes <code>classes</code> où nous avons un échange de clé et d'informations
+permettant de faire le lien d'un élément à un autre.</p>
+</li>
+<li>
+<p>BDD Non Relationelle</p>
+<p>Elles sont plus communément appellées no-SQL puisque elles ont
+choisi de ne pas implémenter de modèle relationnel.<br>
+Elles sont donc le contraire des SQL-like.</p>
+<p>On retrouve les BDD suivantes:</p>
+<ul>
+<li><a href="https://www.mongodb.com/">MongoDB</a></li>
+<li><a href="https://www.influxdata.com/">InfluxDB</a></li>
+</ul>
+<p>Leur force est que nous avons des BDD capables de gérer
+des opérations particulières qui serait très complexe
+voir impossible d'implémenter via des modèles relationnels.</p>
+<p>InfluxDB est pensé pour l'IoT et implémente l'horodatage automatique
+et prend une position sur le temps et s'est spécialisé
+dans la gestion de petites informations mais en grande
+quantité.</p>
+<p>MongoDB est pensé pour gérer des transactions sous format
+de documents, notamment en JSON, ce qui simplifie le stockage
+et la manipulation des données.</p>
+</li>
+</ul>
+<h3 id="pour-le-backend--serveur">Pour le Backend / serveur</h3>
+<p>Pour le Backend, nous devons utiliser du Python, ainsi donc
+nous n'avons pas beaucoup d'autres options de choix technologique
+vu qu'il nous est imposé.</p>
+<p>Cependant, il faut noter qu'aussi facile qu'il puisse paraître
+Python sera incapable de gérer une charge intensive de <code>compute</code>
+ainsi que d'être l'élément centrale d'un système critique nécéssitant
+une puissance importante de calcul en peu de temps.</p>
+<h3 id="pour-le-site-web">Pour le site Web</h3>
+<ul>
+<li>
+<p>HTML</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Force: facile d'utilisation, pas compliqué sur le code.</li>
+<li>Faiblesse : Langage de balisage et non pas un langage de programation.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>ReactJS</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>Force: Utilisation dans les applications mobilesou monopages</li>
+<li>Faiblesse: React ne s'occupe que de la gestion de l'état et du rendu de cet état dans le DOM (Document Object Model), de sorte que la création d'applications React nécessite généralement l'utilisation de bibliothèques supplémentaires pour le routage, ainsi que certaines fonctionnalités côté client.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>NextJS</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>Force: Utilisationde ReactJS en implémentant une parite serveur.</li>
+<li>Faiblesse: Même désavantage que ReactJS.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>PHP</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>Force: Permet deréaliser des pages webs dynamiques, le logiciel est putôt vieu ce qui des solutions faciles en cas de porbleme.</li>
+<li>Faiblesse: Je n'ai pas assez d'expérience sur PHP pour pouvoir réaliser des pages web avec. C'est un logiciel vieu qui apporte beaucoup d'erreurs et peut être bloquant sur les solutions que l'on peut aporter.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>Django</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>Force: Facilite le développement d'applications web et est basé sur la réutilisation de code. Il aide dans les petits problèmes de sécurité</li>
+<li>Faiblesse:</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="copyright-%C2%A9-2023-alexis-opolka--mathys-domergue---all-rights-reserved">Copyright © 2023 Alexis Opolka &amp; Mathys Domergue - All Rights Reserved</h2>
+
+</body>
+</html>
