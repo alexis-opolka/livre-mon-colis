@@ -96,4 +96,9 @@ FEDEX Vehic6-Citroen Jumper
 18-04-2023 11:35:48,Vehic5,43.607345,3.868199+c512-LIVRE+c513-LIVRE
 ```
 
+---
+
+## Comparaisons des technologies
+
+
 ## Copyright &copy; 2023 Alexis Opolka & Mathys Domergue - All Rights Reserved
