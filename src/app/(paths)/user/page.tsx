@@ -59,6 +59,7 @@ export default function UserPage(){
         const saltToBeAdded = salt.replaceAll("/", "");
         userPassword += saltToBeAdded; // Add the salt to the password
 
+        // If the password is less than 32 characters, add random characters to it until it reaches 32 characters
         while (userPassword.length < 32) {
             let missingChars = 32 - userPassword.length;
             let randomChars = Math.random().toString(36).substring(2, 2 + missingChars);
@@ -66,21 +67,93 @@ export default function UserPage(){
             userPassword += randomChars;
         }
 
-        console.log("New Password:", userPassword, userPassword.length, salt, saltToBeAdded);
+        // // Now we have a password with 32 characters, we can encrypt it
+        // // ------------------------------------------------------------
+        // // 1. Create a new AES-GCM key
+        // // 2. Encrypt the password with the key
+        // // 3. Send the encryption key to the server
 
+        // new Promise((resolve: any, reject: any) => {
+        //     crypto.subtle.generateKey(
+        //         {
+        //             "name": "AES-GCM",
+        //             length: 256,
+        //         },
+        //         true,
+        //         ["encrypt", "decrypt"]
+        //     ).then(key => {
+        //         resolve(key);
+        //     }).catch(err => {
+        //         reject(err);
+        //     });
+        // }).then( async key => {
+        //     console.log("KEY:", key);
+        //     const typedKey: CryptoKey = key as CryptoKey;
+        //     const exportableKey = await crypto.subtle.exportKey("jwk", typedKey);
 
+        //     const encodedPassword = new TextEncoder().encode(userPassword);
+        //     // iv will be needed for decryption
+        //     const iv = crypto.getRandomValues(new Uint8Array(12));
+        //     const hash = await crypto.subtle.encrypt(
+        //         {
+        //             "name": "AES-GCM",
+        //             "iv": iv,
+        //         },
+        //         typedKey,
+        //         encodedPassword
+        //     )
 
+        //     // Create a new DataView from the hash (to be able to read it)
+        //     const hashDataView = new DataView(hash);
+        //     // Convert the DataView into a string
+        //     let hashString = new Uint8Array(hash).toString();
 
-        // const form = fetch("http://localhost:3000/proxy?path=/api/user/create/", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         username: user.username,
-        //         password: user.password,
-        //         roles: user.roles,
-        //     }),
-        // }).then(data => data.json()).then(data => {
-        //     console.debug("DATA:", data);
+        //     console.log("New Password:", userPassword, userPassword.length, salt, saltToBeAdded, "hash:", hashString, String(hashDataView.getUint8(0)));
+
+        //     // ------------------------------------------------------------
+        //     // Decryption
+        //     // ------------------------------------------------------------
+
+        //     console.log("Just to be sure, let's decrypt the password");
+        //     const decryptedPassword = await crypto.subtle.decrypt(
+        //         {
+        //             "name": "AES-GCM",
+        //             "iv": iv,
+        //         },
+        //         typedKey,
+        //         hash
+        //     );
+        //     const decryptedPasswordString = new TextDecoder().decode(decryptedPassword);
+        //     console.log("Decrypted Password:", decryptedPasswordString);
+
+        //     const form = fetch("http://localhost:3000/proxy?path=/api/user/create/", {
+        //         method: "POST",
+        //         body: JSON.stringify({
+        //             username: user.username,
+        //             password: hashString,
+        //             roles: user.roles,
+        //             encrypted: true,
+        //             key: exportableKey,
+        //             iv: iv,
+        //         }),
+        //     }).then(data => data.json()).then(data => {
+        //         console.debug("DATA:", data);
+        //     });
+
+        // }).catch(err => {
+        //     console.error("ERROR:", err);
         // });
+
+        const form = fetch("http://localhost:3000/proxy?path=/api/user/create/", {
+            method: "POST",
+            body: JSON.stringify({
+                username: user.username,
+                password: user.password,
+                roles: user.roles,
+            }),
+        }).then(data => data.json()).then(data => {
+            console.debug("DATA:", data);
+        });
     }
 
     return (
