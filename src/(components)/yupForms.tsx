@@ -11,7 +11,7 @@ export function YupFormSelect({
 }: {
     name: string,
     id: string,
-    options: string[],
+    options: string[] | any,
     label?: string,
     registerFunction: CallableFunction,
     errorsHolder?: any,
@@ -22,7 +22,7 @@ export function YupFormSelect({
             <select name={name} id={id}
                 {...registerFunction(name)}
                 className={`form-control ${errorsHolder ? 'is-invalid' : ''}`}>
-                {options.map((option) => {
+                {options.map((option: any) => {
                     return (
                         <option key={option} value={option}>
                             {option}
@@ -44,6 +44,7 @@ export function YupFormInput({
     inputType,
     registerFunction,
     errorsHolder,
+    value,
 }: {
     name: string,
     id: string,
@@ -51,11 +52,14 @@ export function YupFormInput({
     inputType?: string,
     registerFunction: CallableFunction,
     errorsHolder: any,
+    value?: any,
 }): JSX.Element {
     return (
         <div>
             <label htmlFor={name}>{label ? label : name}: &nbsp;</label>
-            <input id={id} name={name} type={inputType ? inputType : "text"} {...registerFunction(name)} className={`form-control ${errorsHolder ? 'is-invalid' : ''}`} />
+            <input id={id} name={name} type={inputType ? inputType : "text"} {...registerFunction(name)} className={`form-control ${errorsHolder ? 'is-invalid' : ''}`} {
+                ...(value ? { value: value } : {})
+            } />
             <div className="invalid-feedback">{CreateCompatibleOutputReactNode(errorsHolder)}</div>
         </div>
     )

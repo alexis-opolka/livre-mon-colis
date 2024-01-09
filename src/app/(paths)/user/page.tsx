@@ -69,7 +69,10 @@ export default function UserPage(){
             </header>
 
             <main>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={
+                    // @ts-ignore
+                    handleSubmit(onSubmit)
+                    }>
                     <section className={style.userFormHolder}>
 
                         <section className={style.userFormSection}>
@@ -82,7 +85,7 @@ export default function UserPage(){
                         </section>
 
                         <section className={style.userFormSection}>
-                            <YupFormSelect name="roles" label="User's role" id="user-roles" options={["admin", "user"]} registerFunction={register} errorsHolder={errors.roles} />
+                            <YupFormSelect name="roles" label="User's role" id="user-roles" options={["seller", "carrier", "client"]} registerFunction={register} errorsHolder={errors.roles} />
                         </section>
 
                         <button disabled={formState.isSubmitting} className="btn btn-primary">

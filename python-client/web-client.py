@@ -29,7 +29,13 @@ def parse_json_u(page):
         print(f"Vous êtes {nom}, votre adresse est {adresse}, liste des colis {liste_colis}")
         
 def parse_json_l(page):
-    print("bonjour")
+    data=page.json()
+    for données in daa:
+        nom=données["name"]
+        id=données["id"]
+        vehicule_i=données["vehicle"]["id"]
+        vehicle_gps=données["vehicle"]["gps"]
+        print(f"Votre colis est transporté par le transporteur {nom}, il est dans le véhicule numéro {vehicule_i}et voici ces coordonées GPS{véhicule_gps}")
 
 def get_user_input() -> int:
     try:
@@ -46,7 +52,7 @@ def get_user_input() -> int:
 
 def get_transport_input() -> str:
     try:
-        transporteur = input("Quel transporteur voulez-vous consulter :")
+        transporteur = input("Quel transporteur voulez-vous consulter: ")
     except KeyboardInterrupt:
         print("Bye bye !")
         exit()
@@ -57,7 +63,7 @@ def get_transport_input() -> str:
 
 print('Bonjour que voulez-vous')
 demande = get_user_input()
-url= "https://api.github.com/events"
+url= "https://localhost:4000/api/"
 
 
 ### Ce dictionnaire est présent seulement le temps que l'environnement
@@ -95,7 +101,7 @@ transporteurs = {
 
 if demande == 1:
     user = input('Vous êtes : \n')
-    new_url= f"{url}client/{user}"
+    new_url= "{url}colis/{id}"
     print (f"Votre url est {new_url}")
     page=requests.get(new_url)
     pstate=page.status_code
@@ -117,26 +123,24 @@ elif demande == 2:
              
 else:
     print("Voici la liste des transporteurs: \n - DPD \n - Colissimo \n - Chronopost \n - DHl \n - Fedex \n - UPS")
+    
+    _id = input("Avez-vous un identifiant:(Réponse: oui ou non) ").lower()
 
-    transporteur = get_transport_input()
-
-    if transporteur in transporteurs.keys():
-        transporteur_data = transporteurs[transporteur]
-        print(f"Tu consulte {transporteur_data['name']}")
+    if _id == "oui":
+        i=input("Votre ID: ")
+        d=requests.get(f"https://localhost:4000/api/delivery/id/{i}")
+        pstate=d.status_code
+        if pstate == request.codes.ok:
+            parse_json_d(d)
+        else:
+            print(f"Votre code erreur{pstate}")  
+    elif _id == "non":
+        n=input("Votre nom: ")
+        da=requests.get(f"https://localhost:4000/api/delivery/name/{n}")
+        pstate=da.status_code
+        if pstate == request.codes.ok:
+            parse_json_d(da)
+        else:
+            print(f"Votre code erreur{pstate}")  
     else:
-        print(f"Désolé, nous ne connaissons pas le transporteur {transporteur}")
-
-
-
-
-_id = input("Est-ce un id").lower()
-
-if _id == "oui":
-    i=input("Votre ID: ")
-    requests.get(f"https://localhost:4000/api/delivery/id/{i}")
-elif _id == "non":
-    n=input("Votre nom: ")
-    requests.get(f"https://localhost:4000/api/delivery/name/{n}")
-else:
-    print("I don't understand")
-
+        print("I don't understand")
