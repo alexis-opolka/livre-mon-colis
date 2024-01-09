@@ -1,11 +1,13 @@
+import style from "@/app/page.module.sass";
+
 export default function livreMonColis(){
 
   return(
     <>
-      <header> Livre Mon Colis</header>
+      <header className={style.Header}> Livre Mon Colis</header>
 
-      <main>
-        <nav>
+      <main className={style.Section}>
+        <nav className={style.Section}>
           <a href="http://localhost:3000/user"> Register user</a>
           <a href="http://localhost:3000/user/login"> Login user</a>
           <a href="http://localhost:3000/packages"> Access packages dashboard (only as Seller)</a>
