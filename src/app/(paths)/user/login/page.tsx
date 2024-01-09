@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 import { YupFormSelect, YupFormInput } from "@components/yupForms";
+import { useEffect } from "react";
 
 export default function UserPage() {
 
@@ -45,11 +46,21 @@ export default function UserPage() {
         // First of all, we need to encrypt the password and then send it to the server
         // where it will be decrypted, re-encrypted and stored in the database
 
-        const form = fetch("http://localhost:3000/proxy?path=/api/user/"+user.username, {
-            method: "GET",
+        const form = fetch("http://localhost:3000/proxy?path=/api/user/login/", {
+            method: "POST",
+            body: JSON.stringify(user),
         }).then(data => data.json()).then(data => {
             console.debug("DATA:", data);
-            router.push("/user/login");
+
+            if (typeof window !== "undefined") {
+                localStorage.setItem("currentUser", JSON.stringify({
+                    username: user.username,
+                    role: data.role,
+                    data: data,
+                }))
+            }
+
+            router.push("/user/logged-in/?username=" + user.username);
         });
     }
 

@@ -1,14 +1,16 @@
-function ProductCategoryRow({ category }) {
+function ProductCategoryRow({ category }:{
+  category: any
+}) {
   return (
     <tr>
-      <th colSpan="2">
+      <th colSpan={2}>
         {category}
       </th>
     </tr>
   );
 }
 
-function ProductRow({ product }) {
+function ProductRow({ product }: {product: any}) {
   const name = product.stocked ? product.name :
     <span style={{ color: 'red' }}>
       {product.name}
@@ -22,11 +24,11 @@ function ProductRow({ product }) {
   );
 }
 
-function ProductTable({ products }) {
-  const rows = [];
-  let lastCategory = null;
+function ProductTable({ products }: {products: any}) {
+  const rows: any[] = [];
+  let lastCategory: any = null;
 
-  products.forEach((product) => {
+  products.forEach((product: any) => {
     if (product.category !== lastCategory) {
       rows.push(
         <ProductCategoryRow
@@ -68,7 +70,9 @@ function SearchBar() {
   );
 }
 
-function FilterableProductTable({ products }) {
+function FilterableProductTable({ products }: {
+  products: any
+}) {
   return (
     <div>
       <SearchBar />
